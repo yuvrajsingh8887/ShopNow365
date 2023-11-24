@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="newpage.css">
+</head>
+<body>
+  <nav>
+    <div class="navbar">
+      <div class="logo">ShopNow365</div>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/new">New</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="new-card-form">
+    <form action="/new" method="post">
+      <input type="text" name="name" placeholder="Product Name" required>
+      <input type="text" name="price" placeholder="Price" required>
+      <input type="text" name="description" placeholder="Description" required>
+      <input type="text" name="imageUrl" placeholder="Image URL" required> 
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+</body>
+</html>

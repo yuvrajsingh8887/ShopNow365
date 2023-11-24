@@ -1,0 +1,212 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+
+nav {
+  background-color: #343a40;
+  color: #ffffff;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-btn {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin-right: 15px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #ffc107;
+}
+
+.logo {
+  font-size: 1.5rem;
+  color: #ffc107;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+#search {
+  padding: 10px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 25px;
+  width: 50%;
+}
+
+#search:focus {
+  outline: none;
+  border: 2px solid #ffc107;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #ffc107;
+  border: none;
+  border-radius: 50px;
+  color: #343a40;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 7px;
+}
+
+button:hover {
+  background-color: #ffca2c;
+}
+
+.login-btn {
+  color: #ffc107;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: color 0.3s;
+  background-color: #ffc107; /* Added background color */
+    padding: 10px 15px; /* Added padding */
+    border-radius: 50px; /* Added border radius */
+    margin-right: 7px;
+}
+
+.login-btn:hover {
+  color: #343a40;
+    background-color: #ffca2c;
+}
+
+.product-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+  gap: 20px;
+}
+
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #343a40;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background-color: #343a40;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links.show {
+      display: flex;
+  }
+
+  .menu-btn {
+      display: block;
+      order: 1;
+      font-size: 1.5rem;
+  }
+
+  .logo {
+      order: 3;
+  }
+
+  .nav-links {
+      order: 2;
+  }
+
+  .search-form,
+  .login-btn {
+      order: 4;
+      padding: 10px;
+      margin-right: -85px;
+      border: none;
+      border-radius: 25px;
+      width: 40%;
+  }
+}
+.card {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: box-shadow 0.3s;
+  width: 300px; /* Adjust the width as needed */
+}
+
+.card:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.wishlist-icon {
+  display: block;
+  font-size: 1.5rem;
+  color: #343a40;
+  cursor: pointer;
+  text-align: right;
+  padding: 5px;
+}
+
+.wishlist-icon.active {
+  color: #ffc107;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card h2,
+.card p {
+  padding: 10px;
+  margin: 0;
+}
+form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+label {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+button {
+  margin-top: -2px;
+}

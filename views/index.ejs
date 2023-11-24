@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce Website</title>
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <!-- Include the navigation bar -->
+    <%- include('navbar.ejs') %>
+
+  <div class="product-cards">
+    <% products.forEach((product, index) => { %>
+      <div class="card" data-name="<%= product.name.toLowerCase() %>">
+        <!-- Wishlist Icon -->
+        <span class="wishlist-icon" onclick="toggleWishlist(this, <%= index %>);">&#x2661;</span>
+        <img src="<%= product.imageUrl %>" alt="">
+        <h2><%= product.name %></h2>
+        <p>Price: $<%= product.price %></p>
+        <p>Description: <%= product.description %></p>
+        <button class="buy-btn" onclick="window.location.href='/product/<%= index %>'">Buy</button>
+      </div>
+    <% }); %>
+  </div>
+
+  <footer>
+    <p>&copy;ShopNow365 2023</p>
+  </footer>
+
+
+</body>
+</html>
