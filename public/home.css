@@ -6,8 +6,14 @@ body {
 }
 
 nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   background-color: #343a40;
   color: #ffffff;
+  z-index: 1000; 
+  transition: background-color 0.3s;
 }
 
 .navbar {
@@ -16,6 +22,8 @@ nav {
   align-items: center;
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
 }
 
 .menu-btn {
@@ -41,6 +49,7 @@ nav {
   font-weight: bold;
   font-size: 1rem;
   transition: color 0.3s;
+  margin-right: 15px;
 }
 
 .nav-links a:hover {
@@ -70,15 +79,15 @@ nav {
   border: 2px solid #ffc107;
 }
 
-button {
+.cart {
   padding: 10px 15px;
-  background-color: #ffc107;
+  background-color: #83ff07;
   border: none;
   border-radius: 50px;
   color: #343a40;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-right: 7px;
+  margin: 3px;
 }
 
 button:hover {
@@ -91,9 +100,9 @@ button:hover {
   font-weight: bold;
   font-size: 1rem;
   transition: color 0.3s;
-  background-color: #ffc107; /* Added background color */
-    padding: 10px 15px; /* Added padding */
-    border-radius: 50px; /* Added border radius */
+  background-color: #ffc107; 
+    padding: 10px 15px;
+    border-radius: 50px; 
     margin-right: 7px;
 }
 
@@ -164,12 +173,15 @@ footer {
   border-radius: 5px;
   overflow: hidden;
   transition: box-shadow 0.3s;
-  width: 300px; /* Adjust the width as needed */
+  width: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
 
 .wishlist-icon {
   display: block;
@@ -209,4 +221,32 @@ label {
 
 button {
   margin-top: -2px;
+}
+.card-content {
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.card h2,
+.card p {
+  margin: 0;
+}
+
+.buy-btn {
+  margin-top: auto;
+  padding: 10px;
+  background-color: #07ffe8;
+  border: none;
+  color: #343a40;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 12px;
+  
+}
+
+.buy-btn:hover {
+  background-color: #ffca2c;
+}
+.add-to-car-btn{
+  background-color: brown;
 }

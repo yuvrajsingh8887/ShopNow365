@@ -14,9 +14,6 @@
         <li><a href="#">Products</a></li>
         <li><a href="/new">New</a></li>
       </ul>
-      <div class="login-btn">
-        <a href="#">Login</a>
-      </div>
     </div>
   </nav>
 
@@ -25,8 +22,9 @@
       <img src="<%= product.imageUrl %>" alt="">
       <h2><%= product.name %></h2>
       <p>Price: $<%= product.price %></p>
-      <p>Description: <%= product.description %></p>
+      <p>Description: <%= product.description %></p><br><br><br>
       <button class="add-to-cart-btn">Add to Cart</button>
+      <br>
       <a class="edit-btn" href="/products/<%= product.id %>/edit">Edit</a>
 
            <form method="POST" action="/products/<%= product.id %>?_method=DELETE">

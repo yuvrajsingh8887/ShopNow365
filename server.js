@@ -2,28 +2,39 @@
 
 const express = require('express');
 const app = express();
+const crypto = require('crypto');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const bcrypt = require('bcrypt');
 const path = require('path');
 const methodOverride = require('method-override'); 
-const products = require('./products');  // Import the products file
+const products = require('./products'); 
 
 
-
-// MongoDB connection
-// mongoose.connect('mongodb://localhost:27017/', { useNewUrlParser: true, useUnifiedTopology: true });
-
-// Define a User model
-const User = mongoose.model('User', {
-  username: String,
-  email: String,
-  password: String,
+const mongoURI = 'mongodb://127.0.0.1:27017/ShopNow365';
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
+});
+
 
 
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'secretKey',
+  resave: true,
+  saveUninitialized: true
+}));
 app.use(methodOverride('_method'));
 
 app.set('view engine', 'ejs');
@@ -138,24 +149,25 @@ app.delete('/products/:id', (req, res) => {
   res.redirect('/');
 });
 
-app.get('/login', (req, res) => {
-  res.render('login');
+
+
+
+
+// Define a User model
+const User = mongoose.model('User', {
+  username: String,
+  email: String,
+  password: String,
 });
 
-
-
-
-
-
-
-// Registration route
 app.get('/register', (req, res) => {
-  res.render('register');
+  res.render('register'); 
 });
+
 
 app.post('/register', async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { name, username, email, password } = req.body;
 
     // Check if user already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
@@ -168,6 +180,7 @@ app.post('/register', async (req, res) => {
 
     // Create a new user
     const newUser = new User({
+      name,
       username,
       email,
       password: hashedPassword,
@@ -176,38 +189,45 @@ app.post('/register', async (req, res) => {
     // Save the user to the database
     await newUser.save();
 
-    res.status(201).json({ message: 'Registration successful' });
+    // Set user session (optional)
+    req.session.userId = newUser._id;
+
+    // Redirect to the login page after successful registration
+    res.redirect('/login');
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+app.get('/login', (req, res) => {
+  res.render('login');
+});
 
 
+// Handle login
+app.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
 
+    // Find the user by username
+    const user = await User.findOne({ username });
 
+    // Check if the user exists and the password is correct
+    if (user && await bcrypt.compare(password, user.password)) {
+      // Set user session (optional)
+      req.session.userId = user._id;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      // Redirect to the home page after successful login
+      res.redirect('/');
+    } else {
+      // If login fails, send an alert message
+      res.status(401).send('<script>alert("Invalid login credentials"); window.location="/login";</script>');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('<script>alert("Internal Server Error"); window.location="/login";</script>');
+  }
+});
 
 
 
