@@ -151,8 +151,6 @@ app.delete('/products/:id', (req, res) => {
 
 
 
-
-
 // Define a User model
 const User = mongoose.model('User', {
   username: String,
@@ -169,16 +167,16 @@ app.post('/register', async (req, res) => {
   try {
     const { name, username, email, password } = req.body;
 
-    // Check if user already exists
+    // check kre ki user exists krtaa hai ki nhi
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
       return res.status(409).json({ message: 'Username or email already in use' });
     }
 
-    // Hash the password
+    // password security ke liye
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create a new user
+    // new user create krne ke liye
     const newUser = new User({
       name,
       username,
@@ -186,13 +184,10 @@ app.post('/register', async (req, res) => {
       password: hashedPassword,
     });
 
-    // Save the user to the database
     await newUser.save();
 
-    // Set user session (optional)
     req.session.userId = newUser._id;
 
-    // Redirect to the login page after successful registration
     res.redirect('/login');
   } catch (error) {
     console.error(error);
@@ -209,7 +204,6 @@ app.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // Find the user by username
     const user = await User.findOne({ username });
 
     // Check if the user exists and the password is correct
@@ -232,21 +226,35 @@ app.post('/login', async (req, res) => {
 
 
 
+app.post('/cart/add/:productId', (req, res) => {
+  const productId = req.params.productId;
+  const product = products.find(p => p.id === parseInt(productId));
+
+  if (!product) {
+    return res.status(404).send('Product not found');
+  }
+
+  cartItems.push({
+    id: product.id,
+    name: product.name,
+    price: product.price,
+  });
+
+  console.log('Updated cartItems:', cartItems);
+
+  res.redirect('/');
+});
+
+app.get('/cart', (req, res) => {
+  res.render('cart', { cartItems });
+});
+
+
+const cartItems = [];
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-const PORT = 3002;
+const PORT = 3003;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

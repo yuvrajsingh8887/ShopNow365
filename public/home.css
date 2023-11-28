@@ -88,6 +88,8 @@ nav {
   cursor: pointer;
   transition: background-color 0.3s;
   margin: 3px;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 button:hover {
@@ -176,6 +178,7 @@ footer {
   width: 300px;
   display: flex;
   flex-direction: column;
+  margin-top: 70px;
 }
 
 .card:hover {
@@ -241,6 +244,7 @@ button {
   cursor: pointer;
   transition: background-color 0.3s;
   margin-bottom: 12px;
+  width: 100%;
   
 }
 

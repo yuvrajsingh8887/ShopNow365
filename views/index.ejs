@@ -11,13 +11,15 @@
     <div class="product-cards">
       <% products.forEach((product, index) => { %>
         <div class="card" data-name="<%= product.name.toLowerCase() %>">
-          <span class="wishlist-icon" onclick="toggleWishlist(this, <%= index %>);">&#x2661;</span>
+
           <img src="<%= product.imageUrl %>" alt="">
           <h2><%= product.name %></h2>
           <p>Price: $<%= product.price %></p>
           <p>Description: <%= product.description %></p>
           <button class="buy-btn" onclick="window.location.href='/product/<%= index %>'">Buy</button>
-          <button class="add-to-cart-btn cart" onclick="addToCart(<%= index %>)">Add to Cart</button> <!-- New button -->
+          <form method="POST" action="/cart/add/<%= product.id %>">
+        <button type="submit" class="add-to-cart-btn cart">Add to Cart</button>
+      </form>
         </div>
       <% }); %>
     </div>
@@ -25,10 +27,7 @@
     <p>&copy;ShopNow365 2023</p>
   </footer>
   <script>
-    // ... your existing script ...
-  
-    function addToCart(index) {
-      // Add logic to add the product to the cart
+      function addToCart(index) {
       console.log('Added product to cart:', products[index]);
     }
   </script>

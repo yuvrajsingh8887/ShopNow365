@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+  <%- include('navbar.ejs') %>
+  <h1>Your Cart</h1>
+
+  <% if (cartItems.length === 0) { %>
+    <p>Your cart is empty.</p>
+  <% } else { %>
+    <ul>
+      <% cartItems.forEach(item => { %>
+        <li><%= item.name %> - $<%= item.price %></li>
+      <% }); %>
+    </ul>
+  <% } %>
+</body>
+</html>
